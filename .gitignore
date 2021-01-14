@@ -1,0 +1,24 @@
+# Ignore all object files:
+
+*.o
+
+# Ignore all backup files:
+
+*~
+
+# Ignore all text documents:
+
+*.txt
+*.doc
+*.docx
+*.pdf
+
+# Ignore all picture files:
+
+*.jpeg
+*.png
+
+# Ignore all executables:
+
+/Exercise1/HelloWorld
+/Exercise2/Exercise2
