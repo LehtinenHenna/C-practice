@@ -7,6 +7,7 @@ Description:	Task 3:
 				Perfoms operations on the numbers.
 */
 
+
 #include <stdio.h>
 #include <math.h>
 
