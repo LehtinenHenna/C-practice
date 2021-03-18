@@ -1,7 +1,9 @@
 /* 
  * File:   		Array.c
  * Author: 		Henna Lehtinen
- * Description: 
+ * Description: Includes functions: 
+ 				printArray that prints elements of array, 
+ 				generateRandom that generates a random number
  */
 
 #include <stdio.h>
