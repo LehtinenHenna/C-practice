@@ -2,7 +2,8 @@
  * File:   		Array.c
  * Author: 		Henna Lehtinen
  * Description: Includes functions: 
- 				printArray that prints elements of array, 
+ 				printArray that prints elements of array,
+ 				fillArrayFromFile that fills an array from a file, 
  				generateRandom that generates a random number
  */
 
@@ -10,6 +11,8 @@
 #include <stdlib.h> 
 #include <time.h>
 #include <unistd.h>
+#include <sys/stat.h>
+#include <string.h>
 
 #include "Array.h"
 
@@ -22,6 +25,56 @@ void printArray(int *arrayPointer, int arraySize) {
 	}
 	return;
 }
+
+int *fillArrayFromFile(int *arrayPointer, char *filePath, int *arraySize) {
+
+	FILE *filePointer = NULL;
+	struct stat statistics = {};
+	int fileSize = 0;
+	int realArraySize = 0;
+	
+	// stat() returns 0 on successful operation,
+	// otherwise returns -1 if unable to get file properties
+	if (stat(filePath, &statistics) == 0) {
+		
+		fileSize = statistics.st_size;
+		printf("File size: %d bytes\n", fileSize);
+		
+	} else {
+		
+		printf("Unable to get file properties.\n");
+	}
+			
+		
+	// now that we know the size of the file in bytes, we can use it to dynamically allocate memory for the array
+	arrayPointer = ((int*) calloc(fileSize, sizeof(int)));
+	filePointer = fopen(filePath, "r");
+	
+	while ((fscanf(filePointer, "%d", arrayPointer)) != EOF) {
+	
+		realArraySize += 1;
+		arrayPointer++;
+		
+	}
+	
+	fclose(filePointer);
+	
+	if (realArraySize < 5) {
+		
+		printf("The size of the file is too small.\n");
+		arrayPointer = NULL;
+		return arrayPointer;
+		
+	} else {
+	
+		*arraySize = realArraySize;
+	
+		arrayPointer = arrayPointer - realArraySize;
+	
+		return arrayPointer;
+	}			
+}
+
 
 
 // Generate a random number in range (start, end)

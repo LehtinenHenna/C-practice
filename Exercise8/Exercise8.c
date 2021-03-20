@@ -1,7 +1,11 @@
 /* 
  * File:   		Exercise8.c
  * Author:		Henna Lehtinen
- * Description: 
+ * Description: Main function implementation.
+ 				Generates an array with 10 random numbers and prints it out.
+ 				Gets a number from a user and checks if the number is found in the array.
+ 				Fills an array from a file of numbers.
+ 				Finds the biggest sum of five adjacent numbers in the array. 				
  */
 
 #include <stdio.h>
@@ -17,6 +21,14 @@
 int main () {
 	
 	int *arrayPointer = NULL;
+	char userInput[4] = {0, 0, 0, 0}; // number 0 in ASCII table is NULL
+	int userInputNumber = 0;
+	int *findNumberPointer = NULL;
+	int *fileArrayPointer = NULL;
+	int fileArraySize = 0;
+	int *fileArraySizePointer = NULL;
+	fileArraySizePointer = &fileArraySize;
+
 	
 	// dynamically allocate memory for an array with 10 elements
 	arrayPointer = ((int*) calloc(SIZE, sizeof(int)));
@@ -46,7 +58,6 @@ int main () {
 	printArray(arrayPointer, SIZE);
 	
 	// get user input to pass later to the findNumber function implemented in Finder.c
-	char userInput[4] = {0, 0, 0, 0}; // number 0 in ASCII table is NULL
 	printf("\nEnter an integer between 0 and 100: ");
 	scanf("%s", userInput);
 	printf("\n");
@@ -65,7 +76,6 @@ int main () {
 	}
 	
 	// turning the userInput into an integer and saving it in userInputNumber
-	int userInputNumber = 0;
 	sscanf(userInput, "%d", &userInputNumber);
 	
 	// checking if the userInputNumber is within the given range 0...100
@@ -75,8 +85,10 @@ int main () {
 		return 0;
 	}
 	
-	int *findNumberPointer = NULL;
+	
 	findNumberPointer = findNumber(arrayPointer, SIZE, userInputNumber);
+	
+	// if findNumber function is not successful it returns a NULL pointer
 	if (findNumberPointer != NULL) {
 		
 		printf("The number %d was found at memory address %p in the array.\n", *findNumberPointer, findNumberPointer);
@@ -85,11 +97,16 @@ int main () {
 		
 		printf("The number %d was not found in the array.\n", userInputNumber);	
 	}
+
+	fileArrayPointer = fillArrayFromFile(fileArrayPointer, "Numbers.txt", fileArraySizePointer);
+	
+	printArray(fileArrayPointer, fileArraySize);
+	findBiggestSum(fileArrayPointer, fileArraySize);
 	
 	// free the dynamically allocated memory after use
 	free(arrayPointer);
-
-	
+	free(fileArrayPointer);
+		
 	return 0;
 }
 
