@@ -6,7 +6,7 @@
  *				Task 3:
  *				~Project Euler problem 36~
  *				Creating an array of numbers that are palindromic in both decimal and binary base.
- *				Saving the array to file Numbers.txt.
+ *				Writing the array to file Numbers.txt.
  *				Reading the numbers from the file and summing them up.
  *				(I checked the sum result 872187 in Project Euler website and it was correct.)
  */
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include "Struct.h"
 #include "Palindrome.h"
+#include "FileIO.h"
 
 
 int main() {
@@ -43,25 +44,38 @@ int main() {
 	
 	int *palindromePointer = NULL;
 	
+	int *fileArrayPointer = NULL;
+	int fileArraySize = 0;
+	int *fileArraySizePointer = NULL;
+	fileArraySizePointer = &fileArraySize;
+	
 	palindromePointer = palindrome(1000000, palindromePointer, palindromeArraySizePointer);
 	
 	if (palindromePointer != NULL) {
+	
 		printf("Palindrome array: \n");
 		arrayPrinter(palindromePointer, palindromeArraySize);
+				
+		// save array to file Numbers.txt
+		writeNumbersToFile(palindromePointer, palindromeArraySize, "Numbers.txt");
 		
-		for (int i = 0; i < palindromeArraySize; i++) {
+		// read the numbers from the file Numbers.txt into fileArrayPointer
+		fileArrayPointer = readNumbersFromFile(fileArrayPointer, "Numbers.txt", fileArraySizePointer);
 		
-			sum += *palindromePointer;
-			palindromePointer++;	
-		}
+		if (fileArrayPointer != NULL) {
 		
-		palindromePointer -= palindromeArraySize;
-		printf("Sum of all elements in Palindrome array: %d\n", sum);
+			printf("File array:\n");
+			arrayPrinter(fileArrayPointer, fileArraySize);
+			
+			// calculate the sum of all the numbers in file array
+			sum = sumNumbersInArray(fileArrayPointer, fileArraySize);
+			printf("Sum of all the numbers in file array: %d\n", sum);
 		
-		//free dynamically allocated memory
-		free(palindromePointer);
-	}	
-	
+			// free dynamically allocated memory
+			free(palindromePointer);
+			free(fileArrayPointer);
+		}		
+	}		
 	return 0;
 }
 

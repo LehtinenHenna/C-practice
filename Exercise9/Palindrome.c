@@ -75,7 +75,6 @@ int *palindrome(int n, int *palindromeArrayPointer, int *palindromeArraySize) {
 			
 				//if i is palindromic and binary version of i is palindromic, save it in the array
 				*palindromeArrayPointer = i;
-				printf("palindromic i: %d\n", i);
 					
 				// increment counter
 				counter++;

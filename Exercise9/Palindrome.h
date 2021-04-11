@@ -8,7 +8,7 @@
 #define PALINDROME_H
 
 
-// Function prototypes here
+// Function prototypes
 int *palindrome(int n, int *pointer, int *palindromeArraySize);
 int *turnNumberToArray(int number, int *pointer, int *arraySizePointer);
 int *convertToBinary(int number, int *pointer, int *arraySizePointer);
