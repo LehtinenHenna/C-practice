@@ -17,7 +17,6 @@
 // Creates an array of Orchard struct objects
 struct Orchard *createOrchards(orchard *arrayPointer, int *arraySize) {
 	
-	
 	char noOfOrchards[SIZE] = {0}; // used to save the user input that requires validation
 	int *numberOfOrchardsPointer = NULL;
 	int numberOfOrchards = 0; // used to save the validated integer value
@@ -34,8 +33,7 @@ struct Orchard *createOrchards(orchard *arrayPointer, int *arraySize) {
 	sizePointer = &size;
 	
 	char temp = 0; // temp char to clear the buffer
-	
-	
+		
 	// ask user how many elements they want in the array
 	printf("Enter the number of orchards: ");
 	scanf("%s", &noOfOrchards);
@@ -74,11 +72,9 @@ struct Orchard *createOrchards(orchard *arrayPointer, int *arraySize) {
 				scanf("%s", &kgPerHarvest);
 				printf("Enter the size of the orchard in square kilometers: ");
 				scanf("%s", &sizeInSquareKm);
-				
-				
+								
 				kgPointer = validateInteger(kgPerHarvest, kgPointer);
-				sizePointer = validateFloat(sizeInSquareKm, sizePointer);
-			
+				sizePointer = validateFloat(sizeInSquareKm, sizePointer);			
 			
 				// validation functions return 0 if input is invalid
 				if (kg != 0 && size != 0.0) {
@@ -96,10 +92,8 @@ struct Orchard *createOrchards(orchard *arrayPointer, int *arraySize) {
 			arrayPointer = arrayPointer - numberOfOrchards;
 		}				
 	}
-
 	return arrayPointer;
 }
-
 
 
 
@@ -122,7 +116,6 @@ void printArray(orchard *arrayPointer, int arraySize) {
 
 
 
-
 // Validates user input that is supposed to be an integer and returns a pointer to integer value
 int *validateInteger(char userInput[], int *userInputNumber) {
 		
@@ -136,10 +129,8 @@ int *validateInteger(char userInput[], int *userInputNumber) {
 			
 			printf("Invalid input: was expecting an integer number.\n");
 			return 0;
-		}
-		
+		}		
 	}
-	
 	// turning the userInput into an integer and saving it in userInputNumber
 	//sscanf(userInput, "%d", &*userInputNumber);
 	*userInputNumber = atoi(userInput);
@@ -150,9 +141,6 @@ int *validateInteger(char userInput[], int *userInputNumber) {
 	}
 	return userInputNumber;
 }
-
-
-
 
 
 
@@ -168,19 +156,16 @@ float *validateFloat(char userInput[], float *userInputFloat) {
 		// ASCII value for . (dot) is 46.
 		// for some reason when user inputs a value it reads a NULL value (0 in ASCII) in the next slot of the array
 		// for instance if user inputs 9, the (int) values in the array will be {57, 0, 0, 0, 0}
-		if (((int) userInput[i] < 48 || (int) userInput[i] > 57) && (int) userInput[i] != 0 && (int) userInput[i] != 46) {
-			
+		if (((int) userInput[i] < 48 || (int) userInput[i] > 57) && (int) userInput[i] != 0 && (int) userInput[i] != 46) {		
 			printf("Invalid input: was expecting a number.\n");
 			return 0;
 		}
 		// if userInput[i] is . (dot) increment the dotCounter. A float should have max 1 dot.
-		if ((int) userInput[i] == 46) {
-		
+		if ((int) userInput[i] == 46) {	
 			dotCounter += 1;
 		}
 	}
 	if (dotCounter > 1) {
-	
 		printf("Invalid input: was expecting a number.\n");
 		return 0;
 	}
@@ -189,8 +174,7 @@ float *validateFloat(char userInput[], float *userInputFloat) {
 	//sscanf(userInput, "%d", &*userInputFloat);
 	*userInputFloat = atof(userInput);
 	
-	if (*userInputFloat == 0.0) {
-	
+	if (*userInputFloat == 0.0) {	
 		printf("Invalid input: input cannot be zero.\n");
 	}
 	return userInputFloat;
