@@ -3,6 +3,7 @@
  * Author:		Henna Lehtinen
  * Description: Task 2: 
  *				Creating an array of Orchard type structs and printing out the elements
+ *
  *				Task 3:
  *				~Project Euler problem 36~
  *				Creating an array of numbers that are palindromic in both decimal and binary base.
@@ -49,7 +50,7 @@ int main() {
 	int *fileArraySizePointer = NULL;
 	fileArraySizePointer = &fileArraySize;
 	
-	palindromePointer = palindrome(1000000, palindromePointer, palindromeArraySizePointer);
+	palindromePointer = palindrome(1000001, palindromePointer, palindromeArraySizePointer);
 	
 	if (palindromePointer != NULL) {
 	

@@ -171,7 +171,6 @@ float *validateFloat(char userInput[], float *userInputFloat) {
 	}
 	
 	// turning the userInput into a float and saving it in userInputFloat
-	//sscanf(userInput, "%d", &*userInputFloat);
 	*userInputFloat = atof(userInput);
 	
 	if (*userInputFloat == 0.0) {	

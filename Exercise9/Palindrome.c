@@ -47,9 +47,9 @@ int *palindrome(int n, int *palindromeArrayPointer, int *palindromeArraySize) {
 	}
 		
 	// check that n is in the correct range
-	if (n < 0 && n > 1000001) {
+	if (n < 1 || n > 1000001) {
 		// if n is not in the correct range
-		printf("n must be in range 0...1000 001.\n");
+		printf("n must be in range 1...1000 001.\n");
 		palindromeArrayPointer = NULL;
 		return palindromeArrayPointer;
 	}
